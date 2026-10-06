@@ -14,10 +14,10 @@ Embeddings are stored in a **FAISS** vector database. Document details (metadata
 | Part | Technology |
 |---|---|
 | API framework | FastAPI |
-| Embedding model | `<your-embedding-model>` |
+| Embedding model | `<all-MiniLM-L6-v2>` |
 | Vector database | FAISS |
 | Relational database | PostgreSQL (SQLAlchemy) |
-| LLM | `<your-llm-provider>` (via API) |
+| LLM | `<openai/gpt-oss-120b>` (via Groq API) |
 | Containerization | Docker / Docker Compose |
 
 ---
@@ -42,18 +42,9 @@ Embeddings are stored in a **FAISS** vector database. Document details (metadata
 
 ### 2. Retrieval Flow
 
-```mermaid
-flowchart TD
-    A[User asks a question] --> B[Retrieval API]
-    B --> C[Load embedding model and FAISS index]
-    C --> D[Convert query to embedding]
-    D --> E[FAISS similarity search<br/>Top 3 results]
-    E --> F[Fetch matching chunk details<br/>from PostgreSQL]
-    F --> G[Build context]
-    G --> H[Prompt = instructions + context + user query]
-    H --> I[LLM API]
-    I --> J[Final answer returned to user]
-```
+
+<img width="356" height="665" alt="image" src="https://github.com/user-attachments/assets/6aac3345-60b5-498f-b1c3-7ca367d8e853" />
+
 
 **Steps**
 
@@ -135,8 +126,6 @@ uvicorn App.main:app --reload
 docker compose up --build
 ```
 
-The API will be available at `http://localhost:8000`.
-Interactive docs (Swagger): `http://localhost:8000/docs`
 
 ---
 
@@ -145,7 +134,7 @@ Interactive docs (Swagger): `http://localhost:8000/docs`
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/<ingestion-endpoint>` | Upload a document, parse, embed and store it |
-| POST | `/<retrieval-endpoint>` | Ask a question and get an answer |
+| GET | `/<retrieval-endpoint>` | Ask a question and get an answer |
 
 Check `/docs` for the exact request and response format.
 

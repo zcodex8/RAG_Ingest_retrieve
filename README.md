@@ -27,6 +27,8 @@ Embeddings are stored in a **FAISS** vector database. Document details (metadata
 ### 1. Ingestion Flow
 
 ![Ingestion Flow](images/ingestion_flow.png)
+<img width="648" height="238" alt="image" src="https://github.com/user-attachments/assets/12c9f151-8187-4008-ad14-5b9691cffe0d" />
+
 
 **Steps**
 
@@ -41,6 +43,8 @@ Embeddings are stored in a **FAISS** vector database. Document details (metadata
 ### 2. Retrieval Flow
 
 ![Retrieval Flow](images/retrieval_flow.png)
+<img width="618" height="168" alt="image" src="https://github.com/user-attachments/assets/16f60d5a-3c8b-480d-a86a-337a12f5528f" />
+
 
 **Steps**
 

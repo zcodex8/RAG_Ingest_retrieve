@@ -14,10 +14,10 @@ Embeddings are stored in a **FAISS** vector database. Document details (metadata
 | Part | Technology |
 |---|---|
 | API framework | FastAPI |
-| Embedding model | `<your-embedding-model>` |
+| Embedding model | `<all-MiniLM-L6-v2>` |
 | Vector database | FAISS |
 | Relational database | PostgreSQL (SQLAlchemy) |
-| LLM | `<your-llm-provider>` (via API) |
+| LLM | `<openai/gpt-oss-120b>` (via groq API) |
 | Containerization | Docker / Docker Compose |
 
 ---
@@ -84,55 +84,14 @@ RAG/
 └── .env                   # Secrets (not in Git)
 ```
 
----
 
-## Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/zcodex8/RAG_Ingest_retrieve.git
-cd RAG_Ingest_retrieve
-```
-
-### 2. Create the `.env` file
-
-```env
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_NAME=your_db_name
-DATABASE_URL=postgresql://your_db_user:your_db_password@localhost:5432/your_db_name
-LLM_API_KEY=your_llm_api_key
-```
-
-> Never commit `.env` to Git. It is already listed in `.gitignore`.
-
-### 3. Run locally
-
-```bash
-python -m venv .rag
-.rag\Scripts\activate        # Windows
-pip install -r requirements.txt
-uvicorn App.main:app --reload
-```
-
-### 4. Run with Docker
-
-```bash
-docker compose up --build
-```
-
-The API will be available at `http://localhost:8000`.
-Interactive docs (Swagger): `http://localhost:8000/docs`
-
----
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/<ingestion-endpoint>` | Upload a document, parse, embed and store it |
-| POST | `/<retrieval-endpoint>` | Ask a question and get an answer |
+| GET | `/<retrieval-endpoint>` | Ask a question and get an answer |
 
 Check `/docs` for the exact request and response format.
 
